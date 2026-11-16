@@ -1,5 +1,8 @@
 from typing import Protocol
 
+from .codec import parse_field, render_field
+from .field import drop
+
 
 class Reader(Protocol):
     def read(self, path: str) -> str: ...
@@ -17,4 +20,5 @@ class TetrisApp:
         self._writer = writer
 
     def run(self, path: str) -> None:
-        self._reader.read(path)
+        field = parse_field(self._reader.read(path))
+        self._writer.write(render_field(drop(field)))
