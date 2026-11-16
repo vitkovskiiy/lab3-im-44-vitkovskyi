@@ -1,9 +1,13 @@
 import sys
 
-from .app import TetrisApp
+from .app import ERROR_MESSAGE, TetrisApp
 from .io_adapters import ConsoleWriter, FileReader
 
 
 def main(argv: list[str] | None = None) -> None:
     args = sys.argv[1:] if argv is None else argv
-    TetrisApp(reader=FileReader(), writer=ConsoleWriter()).run(args[0])
+    writer = ConsoleWriter()
+    if len(args) != 1:
+        writer.write(ERROR_MESSAGE)
+        return
+    TetrisApp(reader=FileReader(), writer=writer).run(args[0])
