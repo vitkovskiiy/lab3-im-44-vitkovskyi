@@ -2,7 +2,7 @@
 
 - Студент: Іван Вітковський
 - Група: ІМ-44
-- Pull request: [PR URL]
+- Pull request: https://github.com/vitkovskiiy/lab3-im-44-vitkovskyi/pull/1
 - Демо-відео (необов'язково): [DEMO VIDEO URL]
 
 Програма читає початковий стан екрана гри, схожої на Тетріс (одна «підвішена»
