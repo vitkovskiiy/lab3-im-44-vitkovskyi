@@ -8,9 +8,12 @@ def parse_field(text: str) -> Field:
     height, width = (int(n) for n in lines[0].split())
     if height < 1 or width < 1:
         raise ValueError("field size must be positive")
+    rows = lines[1:]
+    if len(rows) != height:
+        raise ValueError("row count does not match height")
     piece = set()
     landscape = set()
-    for row, line in enumerate(lines[1 : 1 + height]):
+    for row, line in enumerate(rows):
         for col, char in enumerate(line):
             if char == "p":
                 piece.add(Point(row, col))
