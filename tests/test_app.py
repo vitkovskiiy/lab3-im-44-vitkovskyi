@@ -19,3 +19,13 @@ def test_run_writes_dropped_field_to_writer_exactly_once():
     app.run("input.txt")
 
     assert writer.written == ["..\n..\np#\n"]
+
+
+def test_run_writes_only_generic_error_message_when_input_is_invalid():
+    reader = FakeReader(text="2 2\n.x\n..\n")
+    writer = RecordingWriter()
+    app = TetrisApp(reader=reader, writer=writer)
+
+    app.run("input.txt")
+
+    assert writer.written == ["Error: invalid input\n"]
