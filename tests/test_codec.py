@@ -29,3 +29,29 @@ def test_render_field_draws_rows_with_dots_piece_and_landscape_pixels():
 def test_parse_field_rejects_unknown_pixel_character():
     with pytest.raises(ValueError):
         parse_field("2 3\n.p.\n#x#\n")
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "",
+        "2\n.p\n..\n",
+        "2 2 2\n.p\n..\n",
+        "a 2\n.p\n..\n",
+        "0 2\n",
+        "2 0\n\n\n",
+        "-1 2\n.p\n",
+    ],
+    ids=[
+        "empty file",
+        "one number",
+        "three numbers",
+        "not a number",
+        "zero height",
+        "zero width",
+        "negative height",
+    ],
+)
+def test_parse_field_rejects_invalid_size_line(text):
+    with pytest.raises(ValueError):
+        parse_field(text)
