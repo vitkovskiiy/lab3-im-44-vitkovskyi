@@ -83,3 +83,13 @@ def test_parse_field_accepts_windows_line_endings_with_trailing_empty_line():
         piece=frozenset({Point(0, 1)}),
         landscape=frozenset({Point(1, 0)}),
     )
+
+
+@pytest.mark.parametrize(
+    "text",
+    ["2 3\n.p.\n#.\n", "2 3\n.p.\n#..#\n"],
+    ids=["row shorter than width", "row longer than width"],
+)
+def test_parse_field_rejects_row_length_different_from_width(text):
+    with pytest.raises(ValueError):
+        parse_field(text)
