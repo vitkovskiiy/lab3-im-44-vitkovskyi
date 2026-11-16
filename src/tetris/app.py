@@ -24,7 +24,7 @@ class TetrisApp:
     def run(self, path: str) -> None:
         try:
             field = parse_field(self._reader.read(path))
-        except ValueError:
+        except (OSError, ValueError):
             self._writer.write(ERROR_MESSAGE)
             return
         self._writer.write(render_field(drop(field)))
