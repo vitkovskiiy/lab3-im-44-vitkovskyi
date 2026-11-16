@@ -93,3 +93,8 @@ def test_parse_field_accepts_windows_line_endings_with_trailing_empty_line():
 def test_parse_field_rejects_row_length_different_from_width(text):
     with pytest.raises(ValueError):
         parse_field(text)
+
+
+def test_parse_field_rejects_field_without_piece():
+    with pytest.raises(ValueError):
+        parse_field("2 2\n..\n##\n")
