@@ -65,3 +65,12 @@ def test_parse_field_rejects_invalid_size_line(text):
 def test_parse_field_rejects_row_count_different_from_height(text):
     with pytest.raises(ValueError):
         parse_field(text)
+
+
+def test_parse_field_ignores_empty_lines_at_end_of_file():
+    assert parse_field("2 2\n.p\n#.\n\n\n") == Field(
+        height=2,
+        width=2,
+        piece=frozenset({Point(0, 1)}),
+        landscape=frozenset({Point(1, 0)}),
+    )
