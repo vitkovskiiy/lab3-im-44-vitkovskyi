@@ -14,6 +14,8 @@ def parse_field(text: str) -> Field:
     piece = set()
     landscape = set()
     for row, line in enumerate(rows):
+        if len(line) != width:
+            raise ValueError("row length does not match width")
         for col, char in enumerate(line):
             if char == "p":
                 piece.add(Point(row, col))
