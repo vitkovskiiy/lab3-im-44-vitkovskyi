@@ -2,7 +2,7 @@ from .field import Field, Point
 
 
 def parse_field(text: str) -> Field:
-    lines = text.splitlines()
+    lines = text.rstrip("\n").splitlines()
     if not lines:
         raise ValueError("empty input")
     height, width = (int(n) for n in lines[0].split())
