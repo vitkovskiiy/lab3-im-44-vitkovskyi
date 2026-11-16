@@ -13,3 +13,19 @@ def parse_field(text: str) -> Field:
             elif char == "#":
                 landscape.add(Point(row, col))
     return Field(height, width, frozenset(piece), frozenset(landscape))
+
+
+def render_field(field: Field) -> str:
+    lines = []
+    for row in range(field.height):
+        line = ""
+        for col in range(field.width):
+            point = Point(row, col)
+            if point in field.piece:
+                line += "p"
+            elif point in field.landscape:
+                line += "#"
+            else:
+                line += "."
+        lines.append(line + "\n")
+    return "".join(lines)
