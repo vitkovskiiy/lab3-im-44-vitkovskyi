@@ -20,3 +20,9 @@ def step_down(field: Field) -> Field:
     if any(p.row >= field.height or p in field.landscape for p in moved):
         return field
     return Field(field.height, field.width, moved, field.landscape)
+
+
+def drop(field: Field) -> Field:
+    while (moved := step_down(field)) != field:
+        field = moved
+    return field
