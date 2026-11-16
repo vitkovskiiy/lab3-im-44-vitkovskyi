@@ -55,3 +55,13 @@ def test_parse_field_rejects_unknown_pixel_character():
 def test_parse_field_rejects_invalid_size_line(text):
     with pytest.raises(ValueError):
         parse_field(text)
+
+
+@pytest.mark.parametrize(
+    "text",
+    ["3 2\n.p\n..\n", "1 2\n.p\n..\n"],
+    ids=["fewer rows than height", "more rows than height"],
+)
+def test_parse_field_rejects_row_count_different_from_height(text):
+    with pytest.raises(ValueError):
+        parse_field(text)
