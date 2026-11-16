@@ -74,3 +74,12 @@ def test_parse_field_ignores_empty_lines_at_end_of_file():
         piece=frozenset({Point(0, 1)}),
         landscape=frozenset({Point(1, 0)}),
     )
+
+
+def test_parse_field_accepts_windows_line_endings_with_trailing_empty_line():
+    assert parse_field("2 2\r\n.p\r\n#.\r\n\r\n") == Field(
+        height=2,
+        width=2,
+        piece=frozenset({Point(0, 1)}),
+        landscape=frozenset({Point(1, 0)}),
+    )
