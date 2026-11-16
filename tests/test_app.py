@@ -29,3 +29,13 @@ def test_run_writes_only_generic_error_message_when_input_is_invalid():
     app.run("input.txt")
 
     assert writer.written == ["Error: invalid input\n"]
+
+
+def test_run_writes_same_error_message_when_file_cannot_be_read():
+    reader = FakeReader(error=FileNotFoundError("missing.txt"))
+    writer = RecordingWriter()
+    app = TetrisApp(reader=reader, writer=writer)
+
+    app.run("missing.txt")
+
+    assert writer.written == ["Error: invalid input\n"]
