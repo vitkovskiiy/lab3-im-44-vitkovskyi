@@ -3,6 +3,8 @@ from typing import Protocol
 from .codec import parse_field, render_field
 from .field import drop
 
+ERROR_MESSAGE = "Error: invalid input\n"
+
 
 class Reader(Protocol):
     def read(self, path: str) -> str: ...
@@ -20,5 +22,9 @@ class TetrisApp:
         self._writer = writer
 
     def run(self, path: str) -> None:
-        field = parse_field(self._reader.read(path))
+        try:
+            field = parse_field(self._reader.read(path))
+        except ValueError:
+            self._writer.write(ERROR_MESSAGE)
+            return
         self._writer.write(render_field(drop(field)))
