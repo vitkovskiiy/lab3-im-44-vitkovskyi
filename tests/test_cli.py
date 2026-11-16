@@ -14,3 +14,19 @@ def test_main_prints_error_message_when_input_file_path_is_missing(capsys):
     main([])
 
     assert capsys.readouterr().out == "Error: invalid input\n"
+
+
+def test_main_prints_error_message_for_file_that_is_not_utf8_text(tmp_path, capsys):
+    # PowerShell 5.1 "echo ... > input.txt" writes UTF-16, which is not valid input.
+    path = tmp_path / "input.txt"
+    path.write_bytes("1 1\np\n".encode("utf-16"))
+
+    main([str(path)])
+
+    assert capsys.readouterr().out == "Error: invalid input\n"
+
+
+def test_main_prints_error_message_when_input_file_does_not_exist(tmp_path, capsys):
+    main([str(tmp_path / "missing.txt")])
+
+    assert capsys.readouterr().out == "Error: invalid input\n"
