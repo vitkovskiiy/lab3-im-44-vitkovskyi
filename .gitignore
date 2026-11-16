@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# локальні інструменти агента (TDD-скіл), не частина лабораторної
+.agents/
+.claude/
+skills-lock.json
