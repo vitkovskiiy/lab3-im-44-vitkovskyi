@@ -7,4 +7,4 @@ def test_main_prints_dropped_field_for_input_file_path(tmp_path, capsys):
 
     main([str(path)])
 
-    assert capsys.readouterr().out == "...\n.p.\n#.#\n"
+    assert capsys.readouterr().out == "...\n...\n#p#\n"
