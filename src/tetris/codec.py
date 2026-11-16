@@ -12,6 +12,8 @@ def parse_field(text: str) -> Field:
                 piece.add(Point(row, col))
             elif char == "#":
                 landscape.add(Point(row, col))
+            elif char != ".":
+                raise ValueError(f"unknown pixel {char!r}")
     return Field(height, width, frozenset(piece), frozenset(landscape))
 
 
